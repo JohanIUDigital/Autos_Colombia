@@ -1,0 +1,24 @@
+specVersion: "3.1"
+metadata:
+  name: iu.digital.autoscolombia
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: onpremisejdl
+          url: http://onpremisejdl:50000
+          client: "001"
+        app:
+          name: ZIUDIG_PARQUEO
+          description: Aplicacion autos colombia IU Digital
+          package: $TMP
+          transport: A4HK900126
+        exclude:
+          - /test/

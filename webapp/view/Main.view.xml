@@ -1,0 +1,181 @@
+<mvc:View
+    controllerName="iu.digital.autoscolombia.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    height="100%"
+>
+    <f:DynamicPage
+        headerExpanded="true"
+        showFooter="false"
+        class="sapUiSizeCompact"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Parqueadero Autos Colombia" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                <f:content>
+                    <HBox>
+                        <Label
+                            text="IU Digital de Antioquia 2024"
+                            design="Bold"
+                        />
+                    </HBox>
+                    <HBox
+                        class="sapUiResponsiveContentPadding"
+                        justifyContent="SpaceBetween"
+                        alignItems="Center"
+                    >
+                        <Label
+                            text=" "
+                            class="sapUiLargeMarginBegin"
+                            design="Bold"
+                        />
+                    </HBox>
+                    <HBox
+                        fitContainer="true"
+                        alignItems="Center"
+                        justifyContent="SpaceBetween"
+                        class="sapUiResponsiveContentPadding"
+                    >
+                        <Button
+                            text="Ingreso Vehículos"
+                            press="onPressIngreso"
+                            width="20rem"
+                            class="sapUiMediumMarginEnd"
+                            type="Emphasized"
+                        />
+                        <Button
+                            text="Salida Vehículos"
+                            press="onPressSalida"
+                            width="20rem"
+                            class="sapUiMediumMarginEnd"
+                            type="Emphasized"
+                        />
+                        <Button
+                            text="Gestión Usuarios"
+                            press="onShowMessageBox"
+                            width="20rem"
+                            class="sapUiMediumMarginEnd"
+                            type="Emphasized"
+                        />
+                        <Button
+                            text="Gestión Novedades"
+                            press="onShowMessageBox"
+                            width="20rem"
+                            class="sapUiMediumMarginEnd"
+                            type="Emphasized"
+                        />
+                        <Button
+                            text="Gestión Pagos"
+                            press="onShowMessageBox"
+                            width="20rem"
+                            class="sapUiMediumMarginEnd"
+                            type="Emphasized"
+                        />
+                    </HBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable
+                id="smartTable"
+                entitySet="ZCDS_UID_AUTOS_COLOMBIA"
+                smartFilterId="smartFilterBar"
+                tableType="ResponsiveTable"
+                enableExport="true"
+                beforeExport="onBeforeExport"
+                header="Lista de Celdas"
+                showRowCount="true"
+				enableAutoColumnWidth="false"
+                persistencyKey="SmartTable_Explored"
+                enableAutoBinding="true"
+                useVariantManagement="false"
+                useTablePersonalisation="true"
+                class="sapUiResponsiveContentPadding"
+				
+                initiallyVisibleFields="id_celda,placa,dia_ingreso,hora_ingreso,dia_salida,hora_salida,propietario,tipo_v,novedad"
+            >
+
+		<smartTable:customToolbar>
+			<OverflowToolbar design="Auto">
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://synchronize" text="Actualizar" press="onRefrescar"/>
+			</OverflowToolbar>
+		</smartTable:customToolbar>
+                <Table id="innerTable">
+                    <columns>
+                        <Column width="6rem" hAlign="Center">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "dispo_icon","leadingProperty": "dispo_icon","sortProperty": "dispo_icon","filterProperty": "dispo_icon", "columnIndex": 1}'
+                                />
+                            </customData>
+                            <Label text="Disponible" />
+                        </Column>
+                        <Column width="18rem" hAlign="Center">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "placa","leadingProperty": "placa","sortProperty": "placa","filterProperty": "placa", "columnIndex": 2}'
+                                />
+                            </customData>
+                            <Label text="Placa" />
+                        </Column>
+                        <Column width="18rem" hAlign="Center">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "hora_ingreso","leadingProperty": "hora_ingreso","sortProperty": "hora_ingreso","filterProperty": "hora_ingreso", "columnIndex": 4}'
+                                />
+                            </customData>
+                            <Label text="Hora Ingreso" />
+                        </Column>
+                        <Column width="18rem" hAlign="Center">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "hora_salida","leadingProperty": "hora_salida","sortProperty": "hora_salida","filterProperty": "hora_salida", "columnIndex": 6}'
+                                />
+                            </customData>
+                            <Label text="Hora Salida" />
+                        </Column>
+    <!--
+                        <Column  width="20rem" hAlign="Center">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey": "novedad","leadingProperty": "novedad","sortProperty": "novedad","filterProperty": "novedad", "columnIndex": 10}'
+                                />
+                            </customData>
+                            <Label text="Novedades" />
+                        </Column>
+    -->
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <core:Icon src="{dispo_icon}" ></core:Icon>
+                                <Link text="{placa}"  press="onShowMessageBox" textAlign="Center"/>
+                                <Text text="{path: 'hora_ingreso', formatter: '.formatTime'}" textAlign="Center"/>
+                                <Text text="{path: 'hora_salida', formatter: '.formatTime'}" textAlign="Center"/>
+                               <!-- <Link text="{novedad}"  press="onShowMessageBox" width="12rem" textAlign="Center"/>-->
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

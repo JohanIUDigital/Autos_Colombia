@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgIngreso"
+        title="Ingreso de Vehículo"
+    >
+        <content>
+            <smartForm:SmartForm
+                id="smfIngreso"
+                editable="true"
+                app:defaultCheckBoxDisplayBehaviour="OnOff"
+                app:defaultDropDownDisplayBehaviour="idAndDescription"
+                class="customLabel"
+            >
+                <smartForm:Group>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Placas registradas" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input
+                                id="ingPlaca"
+								maxLength="6"
+								liveChange="_toUpperCase"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Celdas disponibles" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="ingCelda"
+                                items="{ path: '/ZCDS_UID_AUTOS_COLOMBIA', filters: [{path: 'disponible', operator: 'EQ', value1: 'true'}], sorter: { path: 'id_celda' } }"
+                            >
+                                <core:Item
+                                    key="{id_celda}"
+                                    text="- {id_celda}"
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Fecha Ingreso" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <DatePicker
+                                id="ingFecha"
+                                editable="false"
+								displayFormat="dd/MM/YYYY"
+								valueFormat="YYYY/MM/dd"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Hora Ingreso" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <TimePicker
+                                id="ingHora"
+                                valueFormat="HH:mm"
+								support2400="false"
+								displayFormat="HH:mm"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Tipo Vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="ingTipoV"
+                                items="{ path: '/ZCDS_UID_TIPOS_VEH' }"
+                            >
+                                <core:Item
+                                    key="{id_tipo}"
+                                    text="- {descripcion}"
+									
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+            </smartForm:SmartForm>
+        </content>
+        <beginButton>
+            <Button
+                id="Society"
+                text="{i18n>save}"
+                type="Accept"
+                press="onIngreso"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="{i18n>cancel}"
+                press="onCloseIngreso"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
