@@ -11,14 +11,14 @@
                         </smartForm:label>
                         <smartForm:elements>
                             <Select id="salPlaca"
-                                items="{ path: '/zcds_uid_vehiculos' }"
+                                items="{ path: '/ZCDS_VEH_ING_SAL', filters: [{path: 'ya_ingreso', operator: 'EQ', value1: 'X'}] }"
 								change="changeSalPlaca"
 								showSecondaryValues="true"	
                                 forceSelection="false"						
                             >
                                 <core:Item
                                     key="{placa}"
-                                    text="{placa}"
+                                    text="{placa} - {nombres} {apellidos}"
                                 />
                             </Select>
                         </smartForm:elements>

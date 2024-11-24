@@ -23,12 +23,18 @@
                         <smartForm:label>
                             <Label text="Placas registradas" />
                         </smartForm:label>
-                        <smartForm:elements>
-                            <Input
-                                id="ingPlaca"
-								maxLength="6"
-								liveChange="_toUpperCase"
-                            />
+                        <smartForm:elements>       
+                            <Select id="ingPlaca"
+                                items="{ path: '/ZCDS_VEH_ING_SAL', filters: [{path: 'ya_ingreso', operator: 'EQ', value1: ''}] }"
+                                change="changeplacaingreso"
+                                forceSelection="false"
+                            >
+                                <core:Item
+                                    key="{placa}"
+                                    text="{placa} - {nombres} {apellidos}"
+									
+                                />
+                            </Select>
                         </smartForm:elements>
                     </smartForm:GroupElement>
                     <smartForm:GroupElement>
@@ -79,10 +85,11 @@
                         <smartForm:elements>
                             <Select id="ingTipoV"
                                 items="{ path: '/ZCDS_UID_TIPOS_VEH' }"
+                                visible="false"
                             >
                                 <core:Item
                                     key="{id_tipo}"
-                                    text="- {descripcion}"
+                                    text="{id_tipo} - {descripcion}"
 									
                                 />
                             </Select>

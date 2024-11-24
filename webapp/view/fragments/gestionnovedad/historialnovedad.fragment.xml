@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smart="sap.ui.comp.smarttable"
+    xmlns:app="http://schemas.sap.com/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgHistorialNov"
+        stretch="true"
+        title="Historial de novedades"
+    >
+        <content>
+            <VBox>
+                <smart:SmartTable
+                    id="smartHistorial"
+                    entitySet="zcds_uid_novedades"
+                    tableType="ResponsiveTable"
+                    header="Lista de Usuarios"
+                    useVariantManagement="false"
+                    class="sapUiResponsiveContentPadding"
+                    persistencyKey="SmartTablePersistencyKey"
+                    enableAutoBinding="true"
+                    showRowCount="true"
+                    smartFilterId="smartFilterConsultarUsuario"
+                    initiallyVisibleFields="IdNovedad,Placa,Reporto,Descripcion,FechaRegistro,HoraRegistro"
+                    height="500px"
+                >
+                
+		<smart:customToolbar>
+			<OverflowToolbar design="Auto">
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://synchronize" text="Actualizar" press="onRefrescar"/>
+			</OverflowToolbar>
+		</smart:customToolbar>
+                </smart:SmartTable>
+            </VBox>
+        </content>
+        <endButton>
+            <Button
+                text="Salir"
+                press="onCloseHistorialNov"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
+

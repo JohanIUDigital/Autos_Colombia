@@ -1,0 +1,171 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgActualizarUsuario"
+        title="Actualizar Usuario"
+    >
+        <content>
+            <smartForm:SmartForm
+                id="smfActualizarUsuario"
+                editable="true"
+                app:defaultCheckBoxDisplayBehaviour="OnOff"
+                app:defaultDropDownDisplayBehaviour="idAndDescription"
+                class="customLabel"
+            >
+                <smartForm:Group>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Tipo Documento" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="ingActualizarTipoDocumento"
+                                items="{ path: '/ZCDS_UID_TIPOS_DOC'}"
+                                enabled="false"
+                            >
+                                <core:Item
+                                    key="{id_tipo_doc}"
+                                    text="{id_tipo_doc} - {descripcion}"
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Número de Documento" />
+                        </smartForm:label>
+                        <smartForm:elements> 
+                            <Select id="ingActualizarNumeroDocumento"
+                                items="{ path: '/ZCDS_UID_USUARIOS' }"
+                                change="changeActualizarUser"
+                                forceSelection="false"
+                            >
+                                <core:Item
+                                    key="{Cedula}"
+                                    text="{TipoDoc} - {Cedula}"
+									
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Nombres" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input id="ingActualizarNombres" />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Apellidos" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input id="ingActualizarApellidos" />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+
+
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Teléfono" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input
+                                id="ingActualizarTelefono"
+                                type="Number"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Correo Electrónico" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input
+                                id="ingActualizarCorreoElectronico"
+                                type="Email"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Placa vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input
+                                id="ingActualizarPlaca"
+                                maxLength="6"
+                                liveChange="_toUpperCase"
+                                enabled="false"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Marca vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>                            
+                            <Select id="ingActualizarMarca"
+                                items="{ path: '/ZCDS_UID_MARCA_VEH'}"
+                                enabled="false"
+                            >
+                                <core:Item
+                                    key="{id_marca_veh}"
+                                    text="{id_marca_veh} - {descripcion}"
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Modelo vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input
+                                id="ingActualizarModelo"
+                                type="Number"
+                                enabled="false"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Tipo vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="ingActualizarTipoVehiculo"
+                                items="{ path: '/ZCDS_UID_TIPOS_VEH' }"
+                                enabled="false"
+                            >
+                                <core:Item
+                                    key="{id_tipo}"
+                                    text="{id_tipo} - {descripcion}"
+									
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+            </smartForm:SmartForm>
+        </content>
+        <beginButton>
+            <Button
+                text="Actualizar"
+                type="Accept"
+                press="onSaveActualizarUsuario"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancelar"
+                press="onCloseActualizarUsuario"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

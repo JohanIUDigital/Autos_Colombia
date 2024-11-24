@@ -63,14 +63,14 @@
                         />
                         <Button
                             text="Gestión Usuarios"
-                            press="onShowMessageBox"
+                            press="onPressUsuario"
                             width="20rem"
                             class="sapUiMediumMarginEnd"
                             type="Emphasized"
                         />
                         <Button
                             text="Gestión Novedades"
-                            press="onShowMessageBox"
+                            press="onPressNovedad"
                             width="20rem"
                             class="sapUiMediumMarginEnd"
                             type="Emphasized"
@@ -104,7 +104,7 @@
                 useTablePersonalisation="true"
                 class="sapUiResponsiveContentPadding"
 				
-                initiallyVisibleFields="id_celda,placa,dia_ingreso,hora_ingreso,dia_salida,hora_salida,propietario,tipo_v,novedad"
+                initiallyVisibleFields="id_celda,placa,dia_ingreso,hora_ingreso,dia_salida,hora_salida,propietario,"
             >
 
 		<smartTable:customToolbar>
@@ -167,7 +167,7 @@
                         <ColumnListItem>
                             <cells>
                                 <core:Icon src="{dispo_icon}" ></core:Icon>
-                                <Link text="{placa}"  press="onShowMessageBox" textAlign="Center"/>
+                                <Text text="{placa}"  press="onShowMessageBox" textAlign="Center"/>
                                 <Text text="{path: 'hora_ingreso', formatter: '.formatTime'}" textAlign="Center"/>
                                 <Text text="{path: 'hora_salida', formatter: '.formatTime'}" textAlign="Center"/>
                                <!-- <Link text="{novedad}"  press="onShowMessageBox" width="12rem" textAlign="Center"/>-->

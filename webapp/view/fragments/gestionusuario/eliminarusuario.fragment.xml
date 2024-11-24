@@ -1,0 +1,93 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgEliminarUsuario"
+        title="Eliminar Usuario"
+    >
+        <content>
+            <smartForm:SmartForm
+                id="smfEliminarUsuario"
+                editable="true"
+                app:defaultCheckBoxDisplayBehaviour="OnOff"
+                app:defaultDropDownDisplayBehaviour="idAndDescription"
+                class="customLabel"
+            >
+                <smartForm:Group>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Placa vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="ingEliminarPlaca"
+                                items="{ path: '/ZCDS_UID_VEH' }"
+                                change="changeEliminarUser"
+                                visible="false"
+                            >
+                                <core:Item
+                                    key="{placa}"
+                                    text="{placa}"
+									
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Propietario" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="ingEliminarNumeroDocumento"
+                                items="{ path: '/ZCDS_UID_USUARIOS' }"
+                                change="changeEliminarUser"
+                                forceSelection="false"
+                            >
+                                <core:Item
+                                    key="{Cedula}"
+                                    text="{TipoDoc} {Cedula}"
+									
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Nombres" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input id="ingEliminarNombres"
+                                enabled="false"/>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Apellidos" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input id="ingEliminarApellidos"
+                                enabled="false" />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+            </smartForm:SmartForm>
+        </content>
+        <beginButton>
+            <Button
+                text="Eliminar"
+                type="Accept"
+                press="onSaveEliminarUsuario"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancelar"
+                press="onCloseEliminarUsuario"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

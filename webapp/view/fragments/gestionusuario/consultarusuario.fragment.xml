@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smart="sap.ui.comp.smarttable"
+    xmlns:app="http://schemas.sap.com/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgConsultarUsuario"
+        stretch="true"
+        title="Consultar Usuario"
+    >
+        <content>
+            <VBox>
+                <smart:SmartTable
+                    id="smartTableConsultarUsuario"
+                    entitySet="ZCDS_UID_USER_VEH"
+                    tableType="ResponsiveTable"
+                    header="Lista de Usuarios"
+                    useVariantManagement="false"
+                    class="sapUiResponsiveContentPadding"
+                    persistencyKey="SmartTablePersistencyKey"
+                    enableAutoBinding="true"
+                    showRowCount="true"
+                    smartFilterId="smartFilterConsultarUsuario"
+                    initiallyVisibleFields="tipo_doc,cedula,nombrecomp,telefono,email,placa,marca,transmision,modelo"
+                    ignoredFields="nombres,apellidos,id_propietario,id_marca,id_transmision"
+                    height="500px"
+                >
+                
+		<smart:customToolbar>
+			<OverflowToolbar design="Auto">
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://synchronize" text="Actualizar" press="onRefrescar"/>
+			</OverflowToolbar>
+		</smart:customToolbar>
+                </smart:SmartTable>
+            </VBox>
+        </content>
+        <endButton>
+            <Button
+                text="Salir"
+                press="onCloseConsultarUsuario"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
