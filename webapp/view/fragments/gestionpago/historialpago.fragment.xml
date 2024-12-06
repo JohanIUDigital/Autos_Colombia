@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smart="sap.ui.comp.smarttable"
+    xmlns:app="http://schemas.sap.com/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgHistorialPago"
+        stretch="true"
+        title="Historial de Pagos"
+    >
+        <content>
+            <VBox>
+                <smart:SmartTable
+                    id="smartHistorialpago"
+                    entitySet="ZCDS_UID_PAGOS"
+                    tableType="ResponsiveTable"
+                    header="Lista de Pagos"
+                    useVariantManagement="false"
+                    class="sapUiResponsiveContentPadding"
+                    persistencyKey="SmartTablePersistencyKey"
+                    enableAutoBinding="true"
+                    showRowCount="true"
+                    smartFilterId="smartFilterConsultarUsuario"
+                    initiallyVisibleFields="IdRegPago,Placa,MontoPagar,MetodoPago,Banco,NumeroCuenta,Titular,FechaPago,HoraPago"
+                    height="200px"
+                >
+                
+		<smart:customToolbar>
+			<OverflowToolbar design="Auto">
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://synchronize" text="Actualizar" press="onRefrescar"/>
+			</OverflowToolbar>
+		</smart:customToolbar>
+                </smart:SmartTable>
+            </VBox>
+        </content>
+        <endButton>
+            <Button
+                text="Salir"
+                press="onCloseHistorialPago"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
+

@@ -1,0 +1,155 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Dialog
+        id="dlgIngresoPago"
+        title="Ingreso de Pagos"
+    >
+        <content>
+            <smartForm:SmartForm
+                id="smfIngresoPago"
+                editable="true"
+                app:defaultCheckBoxDisplayBehaviour="OnOff"
+                app:defaultDropDownDisplayBehaviour="idAndDescription"
+                class="customLabel"
+            >
+                <smartForm:Group>
+                    <!-- Campo para seleccionar la placa del vehículo -->
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Placa de vehículo" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select
+                                id="ingPagoPlaca"
+                                items="{ path: '/ZCDS_UID_VEH' }"
+                            >
+                                <core:Item
+                                    key="{placa}"
+                                    text="{placa} - {nombres} {apellidos}"
+                                />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    
+                    <!-- Campo para ingresar el monto del pago -->
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Monto del pago" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input
+                                id="montoPago"
+                                type="Number"
+                                placeholder="Ingrese el monto"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    
+                    <!-- Campo para seleccionar el método de pago -->
+                    <smartForm:GroupElement>
+                        <smartForm:label>
+                            <Label text="Método de pago" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select
+                                id="metodoPago"
+                                change="onMetodoPagoChange"
+                            >
+                                <core:Item key="Efectivo" text="Efectivo" />
+                                <core:Item key="Tarjeta" text="Tarjeta" />
+                                <core:Item key="Transferencia" text="Transferencia" />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    
+                    <!-- Campos adicionales que se muestran dinámicamente -->
+                    <smartForm:GroupElement visible="true">
+                        <smartForm:label>
+                            <Label text="Seleccione banco" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Select id="bancoPago">
+                                <core:Item key="BANCOAGRARIO" text="Banco Agrario" />
+                                <core:Item key="BANCOLOMBIA" text="Bancolombia" />
+                                <core:Item key="DAVIVIENDA" text="Davivienda" />
+                                <core:Item key="BBVA" text="BBVA Colombia" />
+                                <core:Item key="ITAU" text="Banco Itaú" />
+                                <core:Item key="BANCOCAJA" text="Banco Caja Social" />
+                                <core:Item key="BANCOBOGOTA" text="Banco de Bogotá" />
+                                <core:Item key="BANCOPOPULAR" text="Banco Popular" />
+                                <core:Item key="BANCOOCCIDENTE" text="Banco de Occidente" />
+                                <core:Item key="SCOTIABANK" text="Scotiabank Colpatria" />
+                            </Select>
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement visible="true">
+                        <smartForm:label>
+                            <Label text="Número de cuenta" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input id="numCuentaPago" placeholder="Ingrese número de cuenta" />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement visible="true">
+                        <smartForm:label>
+                            <Label text="Cédula del titular" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <Input id="cedulaTitularPago" placeholder="Ingrese cédula del titular" />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+                    <!-- Campo para la fecha de pago -->
+                    <smartForm:GroupElement visible="true">
+                        <smartForm:label>
+                            <Label text="Fecha de Pago" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <DatePicker
+                                id="fechaPago"
+                                editable="false"
+								displayFormat="dd/MM/YYYY"
+								valueFormat="YYYY/MM/dd"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+
+                    <!-- Campo para la hora de pago -->
+                    <smartForm:GroupElement visible="true">
+                        <smartForm:label>
+                            <Label text="Hora de Pago" />
+                        </smartForm:label>
+                        <smartForm:elements>
+                            <TimePicker
+                                id="horaPago"
+                                valueFormat="DD/MM/YYYY"
+                                editable="false"
+                            />
+                        </smartForm:elements>
+                    </smartForm:GroupElement>
+
+                </smartForm:Group>
+            </smartForm:SmartForm>
+        </content>
+        <beginButton>
+            <Button
+                text="Registrar"
+                type="Accept"
+                press="onSaveIngresoPago"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="{i18n>cancel}"
+                press="onCloseIngresoPago"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

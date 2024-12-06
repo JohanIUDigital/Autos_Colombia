@@ -12,7 +12,7 @@
     <f:DynamicPage
         headerExpanded="true"
         showFooter="false"
-        class="sapUiSizeCompact"
+        class="sapUiResponsiveContentPadding"
     >
         <f:title>
             <f:DynamicPageTitle>
@@ -77,7 +77,7 @@
                         />
                         <Button
                             text="Gestión Pagos"
-                            press="onShowMessageBox"
+                            press="onPressPago"
                             width="20rem"
                             class="sapUiMediumMarginEnd"
                             type="Emphasized"

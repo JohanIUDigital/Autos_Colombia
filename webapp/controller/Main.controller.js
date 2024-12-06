@@ -68,7 +68,45 @@ sap.ui.define([
                 this.getView().getModel().refresh(0);
             },
 
-            onSaveIngresoNov: function(){
+            onSaveIngresoPago: function () {
+                var oView = this.getView();
+                var oJson = {
+                    "Mandt": "001",
+                    "Idregpago": "103",
+                    "Placa": oView.byId("ingPagoPlaca").getSelectedKey(),
+                    "Montopagar": oView.byId("montoPago").getValue(),
+                    "Fechapago": new Date(),
+                    "Metodopago": oView.byId("metodoPago").getSelectedKey(),
+                    "Banco": oView.byId("bancoPago").getSelectedKey(),
+                    "Numerocuenta": oView.byId("numCuentaPago").getValue(),
+                    "Titular": oView.byId("cedulaTitularPago").getValue()
+                    //"Horapago": 120000
+                };
+                this.crearPago(oJson);
+            },
+
+            crearPago: function (oNewEntry) {
+                this.getView().getModel().create("/pagoSet", oNewEntry, {
+                    success: function (oData) {
+                        console.log(oData);
+                        this.getView().getModel().refresh(0);
+
+                        sap.m.MessageBox.success(`Se ha registrado el pago correctamente`, {
+                            title: "Registro Pago Exitoso"
+                        });
+                        this.onCloseIngresoPago();
+                        sap.ui.core.BusyIndicator.hide();
+
+                    }.bind(this),
+                    error: function (oError) {
+                        console.log(oError);
+                        sap.ui.core.BusyIndicator.hide();
+                        this.onCloseIngresoPago();
+                    }.bind(this),
+                });
+            },
+
+            onSaveIngresoNov: function () {
                 var oView = this.getView();
                 var oJson = {
                     "placa": oView.byId("ingNovPlaca").getSelectedKey(),
@@ -77,8 +115,6 @@ sap.ui.define([
                 };
                 this.crearNovedad(oJson);
             },
-
-            
 
             crearNovedad: function (oNewEntry) {
                 this.getView().getModel().create("/novedadSet", oNewEntry, {
@@ -279,6 +315,22 @@ sap.ui.define([
                 });
             },
 
+            onPressHistorialPago: function () {
+                var oView = this.getView();
+                var oDialog = oView.byId("dlgHistorialPago");
+                if (!oDialog) {
+                    oDialog = sap.ui.xmlfragment(oView.getId(), "iu.digital.autoscolombia.view.fragments.gestionpago.historialpago", this);
+                    oView.addDependent(oDialog);
+                }
+                oDialog.open();
+            },
+
+            onCloseHistorialPago: function () {
+                var oView = this.getView();
+                var oDialog = oView.byId("dlgHistorialPago");
+                oDialog.close();
+            },
+
             onPressHistorialNovedad: function () {
                 var oView = this.getView();
                 var oDialog = oView.byId("dlgHistorialNov");
@@ -294,6 +346,23 @@ sap.ui.define([
                 var oDialog = oView.byId("dlgHistorialNov");
                 oDialog.close();
             },
+
+            onPressPago: function () {
+                var oView = this.getView();
+                var oDialog = oView.byId("dlgPago");
+                if (!oDialog) {
+                    oDialog = sap.ui.xmlfragment(oView.getId(), "iu.digital.autoscolombia.view.fragments.pago", this);
+                    oView.addDependent(oDialog);
+                }
+                oDialog.open();
+            },
+
+            onClosePago: function () {
+                var oView = this.getView();
+                var oDialog = oView.byId("dlgPago");
+                oDialog.close();
+            },
+
             onPressNovedad: function () {
                 var oView = this.getView();
                 var oDialog = oView.byId("dlgNovedad");
@@ -327,6 +396,26 @@ sap.ui.define([
                 oDialog.close();
             },
 
+            onPressIngresarPago: function () {
+                var oView = this.getView();
+                var oDialog = oView.byId("dlgIngresoPago");
+                if (!oDialog) {
+                    oDialog = sap.ui.xmlfragment(oView.getId(), "iu.digital.autoscolombia.view.fragments.gestionpago.ingresarpago", this);
+                    oView.addDependent(oDialog);
+                }
+                oView.byId("fechaPago").setDateValue(new Date);
+                var sTime = new Date().getHours() + ":" + new Date().getMinutes();
+                oView.byId("horaPago").setValue(sTime)
+                oDialog.open();
+
+            },
+
+            onCloseIngresoPago: function () {
+                var oView = this.getView();
+                var oDialog = oView.byId("dlgIngresoPago");
+                oDialog.close();
+            },
+
             onPressIngresarNovedad: function () {
                 var oView = this.getView();
                 var oDialog = oView.byId("dlgIngresoNov");
@@ -343,6 +432,7 @@ sap.ui.define([
                 var oDialog = oView.byId("dlgIngresoNov");
                 oDialog.close();
             },
+
             onPressCrearUsuario: function () {
                 var oView = this.getView();
                 var oDialog = oView.byId("dlgCrearUsuario");
